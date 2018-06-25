@@ -19,9 +19,21 @@
   -- (Read: http://dynalon.github.io/mdwiki/#!quickstart.md#Adding_a_navigation)
   -->
 
-[About](pages/about.md)
+[markdown](pages/markdown.md)
 [Download](pages/download.md)
-[markdown-it](pages/markdown-it.md)
+[About](pages/about.md)
+
+[Menu Item 1]()
+
+  * # SubMenu Heading 1
+  * [SubMenu Item 1](pages/subitem1.md)
+  * [SubMenu Item 2](pages/subitem2.md)
+  - - - -
+  * # SubMenu Heading 2
+  * [SubMenu Item 3](pages/subitem3.md)
+  - - - -
+  * # SubMenu Heading 3
+  * [SubMenu Item 3](pages/subitem3.md)
 
 <!-- A more complex navigation example: ----------------------------------------
 
