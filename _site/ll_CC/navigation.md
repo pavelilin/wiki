@@ -3,7 +3,7 @@
   -- Do NOT remove the leading `#` character.
   -->
 
-# Your wiki name
+# 3os Wiki
 
 
 <!--
@@ -21,6 +21,7 @@
 
 [About](pages/about.md)
 [Download](pages/download.md)
+[markdown-it](pages/markdown-it.md)
 
 <!-- A more complex navigation example: ----------------------------------------
 
