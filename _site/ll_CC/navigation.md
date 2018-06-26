@@ -11,7 +11,7 @@
   -- (Read: http://dynalon.github.io/mdwiki/#!customizing.md#Theme_chooser)
   -->
 
-[gimmick:theme](flatly)
+<!-- [gimmick:theme](flatly) -->
 
 
 <!--
@@ -21,8 +21,6 @@
 
 [markdown](pages/markdown.md)
 [Download](pages/download.md)
-[About](pages/about.md)
-
 [Menu Item 1]()
 
   * # SubMenu Heading 1
@@ -34,6 +32,11 @@
   - - - -
   * # SubMenu Heading 3
   * [SubMenu Item 3](pages/subitem3.md)
+
+
+[gimmick:themechooser](Choose theme)
+[About](pages/about.md)
+
 
 <!-- A more complex navigation example: ----------------------------------------
 
