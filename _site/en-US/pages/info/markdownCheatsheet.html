@@ -14,10 +14,10 @@
 <meta property="og:url" content="http://localhost:4000/en-US/pages/info/markdownCheatsheet.html" />
 <meta property="og:site_name" content="wiki" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/en-US/pages/info/markdownCheatsheet.html","headline":"Markdown Cheatsheet","@type":"WebPage","@context":"http://schema.org"}</script>
+{"headline":"Markdown Cheatsheet","url":"http://localhost:4000/en-US/pages/info/markdownCheatsheet.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=c4dc80772a7382dc74e6a8dce6797edd81458d91">
+    <link rel="stylesheet" href="/assets/css/style.css?v=9d05d092f459abd638a9be4c3f9b9f58640fab2c">
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
@@ -27,413 +27,611 @@
 
       <h1 id="markdown-cheatsheet">Markdown Cheatsheet</h1>
 
-<h2 id="headers">Headers</h2>
+<h2 id="headings">Headings</h2>
 
-<pre><code class="language-no-highlight"># H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
+<p>Headings from <code class="highlighter-rouge">h1</code> through <code class="highlighter-rouge">h6</code> are constructed with a <code class="highlighter-rouge">#</code> for each level:</p>
 
-Alternatively, for H1 and H2, an underline-ish style:
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># h1 Heading</span>
+<span class="gu">## h2 Heading</span>
+<span class="gu">### h3 Heading</span>
+<span class="gu">#### h4 Heading</span>
+<span class="gu">##### h5 Heading</span>
+<span class="gu">###### h6 Heading</span>
+</code></pre></div></div>
 
-Alt-H1
-======
+<p>Renders to:</p>
 
-Alt-H2
-------
-</code></pre>
+<h1 id="h1-heading">h1 Heading</h1>
+<h2 id="h2-heading">h2 Heading</h2>
+<h3 id="h3-heading">h3 Heading</h3>
+<h4 id="h4-heading">h4 Heading</h4>
+<h5 id="h5-heading">h5 Heading</h5>
+<h6 id="h6-heading">h6 Heading</h6>
 
-<h1 id="h1">H1</h1>
-<h2 id="h2">H2</h2>
-<h3 id="h3">H3</h3>
-<h4 id="h4">H4</h4>
-<h5 id="h5">H5</h5>
-<h6 id="h6">H6</h6>
+<p>HTML:</p>
 
-<p>Alternatively, for H1 and H2, an underline-ish style:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>h1 Heading<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>h2 Heading<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;h3&gt;</span>h3 Heading<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;h4&gt;</span>h4 Heading<span class="nt">&lt;/h4&gt;</span>
+<span class="nt">&lt;h5&gt;</span>h5 Heading<span class="nt">&lt;/h5&gt;</span>
+<span class="nt">&lt;h6&gt;</span>h6 Heading<span class="nt">&lt;/h6&gt;</span>
+</code></pre></div></div>
 
-<h1 id="alt-h1">Alt-H1</h1>
+<p><br />
+<br />
+<br /></p>
 
-<h2 id="alt-h2">Alt-H2</h2>
+<h2 id="horizontal-rules">Horizontal Rules</h2>
+
+<p>The HTML <code class="highlighter-rouge">&lt;hr&gt;</code> element is for creating a “thematic break” between paragraph-level elements. In markdown, you can create a <code class="highlighter-rouge">&lt;hr&gt;</code> with any of the following:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">___</code>: three consecutive underscores</li>
+  <li><code class="highlighter-rouge">---</code>: three consecutive dashes</li>
+  <li><code class="highlighter-rouge">***</code>: three consecutive asterisks</li>
+</ul>
+
+<p>renders to:</p>
+
+<hr />
+
+<hr />
+
+<hr />
+
+<p><br />
+<br />
+<br /></p>
+
+<h2 id="body-copy">Body Copy</h2>
+
+<p>Body copy written as normal, plain text will be wrapped with <code class="highlighter-rouge">&lt;p&gt;&lt;/p&gt;</code> tags in the rendered HTML.</p>
+
+<p>So this body copy:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.
+</code></pre></div></div>
+<p>renders to this HTML:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<p><br />
+<br />
+<br /></p>
 
 <h2 id="emphasis">Emphasis</h2>
 
-<pre><code class="language-no-highlight">Emphasis, aka italics, with *asterisks* or _underscores_.
+<h3 id="bold">Bold</h3>
+<p>For emphasizing a snippet of text with a heavier font-weight.</p>
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+<p>The following snippet of text is <strong>rendered as bold text</strong>.</p>
 
-Combined emphasis with **asterisks and _underscores_**.
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gs">**rendered as bold text**</span>
+</code></pre></div></div>
+<p>renders to:</p>
 
-Strikethrough uses two tildes. ~~Scratch this.~~
-</code></pre>
+<p><strong>rendered as bold text</strong></p>
 
-<p>Emphasis, aka italics, with <em>asterisks</em> or <em>underscores</em>.</p>
+<p>and this HTML</p>
 
-<p>Strong emphasis, aka bold, with <strong>asterisks</strong> or <strong>underscores</strong>.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;strong&gt;</span>rendered as bold text<span class="nt">&lt;/strong&gt;</span>
+</code></pre></div></div>
 
-<p>Combined emphasis with <strong>asterisks and <em>underscores</em></strong>.</p>
+<h3 id="italics">Italics</h3>
+<p>For emphasizing a snippet of text with italics.</p>
 
-<p>Strikethrough uses two tildes. <del>Scratch this.</del></p>
+<p>The following snippet of text is <em>rendered as italicized text</em>.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ge">_rendered as italicized text_</span>
+</code></pre></div></div>
+
+<p>renders to:</p>
+
+<p><em>rendered as italicized text</em></p>
+
+<p>and this HTML:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;em&gt;</span>rendered as italicized text<span class="nt">&lt;/em&gt;</span>
+</code></pre></div></div>
+
+<h3 id="strikethrough">strikethrough</h3>
+<p>In GFM you can do strickthroughs.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~~Strike through this text.~~
+</code></pre></div></div>
+<p>Which renders to:</p>
+
+<p><del>Strike through this text.</del></p>
+
+<p><br />
+<br />
+<br /></p>
+
+<h2 id="blockquotes">Blockquotes</h2>
+<p>For quoting blocks of content from another source within your document.</p>
+
+<p>Add <code class="highlighter-rouge">&gt;</code> before any text you want to quote.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Add <span class="sb">`&gt;`</span> before any text you want to quote. 
+</code></pre></div></div>
+
+<p>Renders to:</p>
+
+<blockquote>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+</blockquote>
+
+<p>and this HTML:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;blockquote&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/blockquote&gt;</span>
+</code></pre></div></div>
+
+<p>Blockquotes can also be nested:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue. </span>
+Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi. 
+<span class="gt">&gt;&gt; Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor </span>
+odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
+<span class="gt">&gt;&gt;&gt; Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue. </span>
+Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi. 
+</code></pre></div></div>
+
+<p>Renders to:</p>
+
+<blockquote>
+  <p>Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue. 
+Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.</p>
+  <blockquote>
+    <p>Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor 
+odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.</p>
+    <blockquote>
+      <p>Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue. 
+Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p><br />
+<br />
+<br /></p>
 
 <h2 id="lists">Lists</h2>
 
+<h3 id="unordered">Unordered</h3>
+<p>A list of items in which the order of the items does not explicitly matter.</p>
+
+<p>You may use any of the following symbols to denote bullets for each list item:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">*</span> valid bullet
+<span class="p">-</span> valid bullet
+<span class="p">+</span> valid bullet
+</code></pre></div></div>
+
+<p>For example</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">+</span> Lorem ipsum dolor sit amet
+<span class="p">+</span> Consectetur adipiscing elit
+<span class="p">+</span> Integer molestie lorem at massa
+<span class="p">+</span> Facilisis in pretium nisl aliquet
+<span class="p">+</span> Nulla volutpat aliquam velit
+<span class="p">  -</span> Phasellus iaculis neque
+<span class="p">  -</span> Purus sodales ultricies
+<span class="p">  -</span> Vestibulum laoreet porttitor sem
+<span class="p">  -</span> Ac tristique libero volutpat at
+<span class="p">+</span> Faucibus porta lacus fringilla vel
+<span class="p">+</span> Aenean sit amet erat nunc
+<span class="p">+</span> Eget porttitor lorem
+</code></pre></div></div>
+<p>Renders to:</p>
+
 <ul>
-  <li>George Washington</li>
-  <li>John Adams</li>
-  <li>Thomas Jefferson</li>
-  <li>Chima İlker</li>
-  <li>Siddharth Saifullah</li>
-  <li>John Adams</li>
-  <li>Gobinda Claribel</li>
-</ul>
-
-<ol>
-  <li>James Madison</li>
-  <li>James Monroe</li>
-  <li>John Quincy Adams</li>
-</ol>
-
-<p>(In this example, leading and trailing spaces are shown with with dots: ⋅)</p>
-
-<pre><code class="language-no-highlight">1. First ordered list item
-2. Another item
-⋅⋅* Unordered sub-list. 
-1. Actual numbers don't matter, just that it's a number
-⋅⋅1. Ordered sub-list
-4. And another item.
-
-⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
-
-⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
-⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
-⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
-
-</code></pre>
-
-<ol>
-  <li>First ordered list item</li>
-  <li>Another item
+  <li>Lorem ipsum dolor sit amet</li>
+  <li>Consectetur adipiscing elit</li>
+  <li>Integer molestie lorem at massa</li>
+  <li>Facilisis in pretium nisl aliquet</li>
+  <li>Nulla volutpat aliquam velit
     <ul>
-      <li>Unordered sub-list.</li>
+      <li>Phasellus iaculis neque</li>
+      <li>Purus sodales ultricies</li>
+      <li>Vestibulum laoreet porttitor sem</li>
+      <li>Ac tristique libero volutpat at</li>
     </ul>
   </li>
-  <li>Actual numbers don’t matter, just that it’s a number</li>
-  <li>Ordered sub-list</li>
-  <li>
-    <p>And another item.</p>
+  <li>Faucibus porta lacus fringilla vel</li>
+  <li>Aenean sit amet erat nunc</li>
+  <li>Eget porttitor lorem</li>
+</ul>
 
-    <p>You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we’ll use three here to also align the raw Markdown).</p>
+<p>And this HTML</p>
 
-    <p>To have a line break without a paragraph, you will need to use two trailing spaces.<br />
-Note that this line is separate, but within the same paragraph.<br />
-(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)</p>
-  </li>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Lorem ipsum dolor sit amet<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Consectetur adipiscing elit<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Integer molestie lorem at massa<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Facilisis in pretium nisl aliquet<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Nulla volutpat aliquam velit
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Phasellus iaculis neque<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Purus sodales ultricies<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Vestibulum laoreet porttitor sem<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Ac tristique libero volutpat at<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Faucibus porta lacus fringilla vel<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Aenean sit amet erat nunc<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Eget porttitor lorem<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<h3 id="ordered">Ordered</h3>
+
+<p>A list of items in which the order of items does explicitly matter.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">1.</span> Lorem ipsum dolor sit amet
+<span class="p">2.</span> Consectetur adipiscing elit
+<span class="p">3.</span> Integer molestie lorem at massa
+<span class="p">4.</span> Facilisis in pretium nisl aliquet
+<span class="p">5.</span> Nulla volutpat aliquam velit
+<span class="p">6.</span> Faucibus porta lacus fringilla vel
+<span class="p">7.</span> Aenean sit amet erat nunc
+<span class="p">8.</span> Eget porttitor lorem
+</code></pre></div></div>
+<p>Renders to:</p>
+
+<ol>
+  <li>Lorem ipsum dolor sit amet</li>
+  <li>Consectetur adipiscing elit</li>
+  <li>Integer molestie lorem at massa</li>
+  <li>Facilisis in pretium nisl aliquet</li>
+  <li>Nulla volutpat aliquam velit</li>
+  <li>Faucibus porta lacus fringilla vel</li>
+  <li>Aenean sit amet erat nunc</li>
+  <li>Eget porttitor lorem</li>
 </ol>
+
+<p>And this HTML:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Lorem ipsum dolor sit amet<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Consectetur adipiscing elit<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Integer molestie lorem at massa<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Facilisis in pretium nisl aliquet<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Nulla volutpat aliquam velit<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Faucibus porta lacus fringilla vel<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Aenean sit amet erat nunc<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Eget porttitor lorem<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ol&gt;</span>
+</code></pre></div></div>
+
+<p><strong>TIP</strong>: If you just use <code class="highlighter-rouge">1.</code> for each number, GitHub will automatically number each item. For example:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">1.</span> Lorem ipsum dolor sit amet
+<span class="p">1.</span> Consectetur adipiscing elit
+<span class="p">1.</span> Integer molestie lorem at massa
+<span class="p">1.</span> Facilisis in pretium nisl aliquet
+<span class="p">1.</span> Nulla volutpat aliquam velit
+<span class="p">1.</span> Faucibus porta lacus fringilla vel
+<span class="p">1.</span> Aenean sit amet erat nunc
+<span class="p">1.</span> Eget porttitor lorem
+</code></pre></div></div>
+
+<p>Renders to:</p>
+
+<ol>
+  <li>Lorem ipsum dolor sit amet</li>
+  <li>Consectetur adipiscing elit</li>
+  <li>Integer molestie lorem at massa</li>
+  <li>Facilisis in pretium nisl aliquet</li>
+  <li>Nulla volutpat aliquam velit</li>
+  <li>Faucibus porta lacus fringilla vel</li>
+  <li>Aenean sit amet erat nunc</li>
+  <li>Eget porttitor lorem</li>
+</ol>
+
+<p><br />
+<br />
+<br /></p>
+
+<h2 id="code">Code</h2>
+
+<h3 id="inline-code">Inline code</h3>
+<p>Wrap inline snippets of code with <code class="highlighter-rouge">`</code>.</p>
+
+<p>For example, <code class="highlighter-rouge">&lt;section&gt;&lt;/section&gt;</code> should be wrapped as “inline”.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For example, `<span class="nt">&lt;section&gt;&lt;/section&gt;</span>` should be wrapped as "inline".
+</code></pre></div></div>
+
+<h3 id="indented-code">Indented code</h3>
+
+<p>Or indent several lines of code by at least four spaces, as in:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Some comments</span>
+    <span class="nx">line</span> <span class="mi">1</span> <span class="k">of</span> <span class="nx">code</span>
+    <span class="nx">line</span> <span class="mi">2</span> <span class="k">of</span> <span class="nx">code</span>
+    <span class="nx">line</span> <span class="mi">3</span> <span class="k">of</span> <span class="nx">code</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Some comments
+line 1 of code
+line 2 of code
+line 3 of code
+</code></pre></div></div>
+
+<h3 id="block-code-fences">Block code “fences”</h3>
+
+<p>Use “fences”  <code class="highlighter-rouge">```</code> to block in multiple lines of code.</p>
+
+<pre>
+``` html
+Sample text here...
+```
+</pre>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sample text here...
+</code></pre></div></div>
+
+<p>HTML:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;pre&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Sample text here...<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/pre&gt;</span>
+</code></pre></div></div>
+
+<h3 id="syntax-highlighting">Syntax highlighting</h3>
+
+<p>GFM, or “GitHub Flavored Markdown” also supports syntax highlighting. To activate it, simply add the file extension of the language you want to use directly after the first code “fence”, ` ``` js `, and syntax highlighting will automatically be applied in the rendered HTML. For example, to apply syntax highlighting to JavaScript code:</p>
+
+<pre>
+``` javascript
+grunt.initConfig({
+  assemble: {
+    options: {
+      assets: 'docs/assets',
+      data: 'src/data/*.{json,yml}',
+      helpers: 'src/custom-helpers.js',
+      partials: ['src/partials/**/*.{hbs,md}']
+    },
+    pages: {
+      options: {
+        layout: 'default.hbs'
+      },
+      files: {
+        './': ['src/templates/pages/index.hbs']
+      }
+    }
+  }
+};
+```
+</pre>
+
+<p>Renders to:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+  <span class="na">assemble</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">assets</span><span class="p">:</span> <span class="s1">'docs/assets'</span><span class="p">,</span>
+      <span class="na">data</span><span class="p">:</span> <span class="s1">'src/data/*.{json,yml}'</span><span class="p">,</span>
+      <span class="na">helpers</span><span class="p">:</span> <span class="s1">'src/custom-helpers.js'</span><span class="p">,</span>
+      <span class="na">partials</span><span class="p">:</span> <span class="p">[</span><span class="s1">'src/partials/**/*.{hbs,md}'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="na">pages</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">layout</span><span class="p">:</span> <span class="s1">'default.hbs'</span>
+      <span class="p">},</span>
+      <span class="na">files</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'./'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'src/templates/pages/index.hbs'</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>And this complicated HTML:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"highlight"</span><span class="nt">&gt;&lt;pre&gt;&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>grunt<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>.<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>initConfig<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>({<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>assemble<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>{<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>options<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>{<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>assets<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"s1"</span><span class="nt">&gt;</span>'docs/assets'<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>,<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>data<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"s1"</span><span class="nt">&gt;</span>'src/data/*.{json,yml}'<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>,<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>helpers<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"s1"</span><span class="nt">&gt;</span>'src/custom-helpers.js'<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>,<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>partials<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>[<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"s1"</span><span class="nt">&gt;</span>'src/partials/**/*.{hbs,md}'<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>]<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>},<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>pages<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>{<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>options<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>{<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>layout<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"s1"</span><span class="nt">&gt;</span>'default.hbs'<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>},<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"nx"</span><span class="nt">&gt;</span>files<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>{<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"s1"</span><span class="nt">&gt;</span>'./'<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"o"</span><span class="nt">&gt;</span>:<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>[<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"s1"</span><span class="nt">&gt;</span>'src/templates/pages/index.hbs'<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>]<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>}<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>}<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"p"</span><span class="nt">&gt;</span>};<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/pre&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p><br />
+<br />
+<br /></p>
+
+<h2 id="tables">Tables</h2>
+<p>Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+</code></pre></div></div>
+
+<p>Renders to:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>path to data files to supply the data that will be passed into templates.</td>
+    </tr>
+    <tr>
+      <td>engine</td>
+      <td>engine to be used for processing templates. Handlebars is the default.</td>
+    </tr>
+    <tr>
+      <td>ext</td>
+      <td>extension to be used for dest files.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>And this HTML:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Option<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Description<span class="nt">&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>data<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>path to data files to supply the data that will be passed into templates.<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>engine<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>engine to be used for processing templates. Handlebars is the default.<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>ext<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>extension to be used for dest files.<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</code></pre></div></div>
+
+<h3 id="right-aligned-text">Right aligned text</h3>
+
+<p>Adding a colon on the right side of the dashes below any heading will right align text for that column.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Option</th>
+      <th style="text-align: right">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">data</td>
+      <td style="text-align: right">path to data files to supply the data that will be passed into templates.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">engine</td>
+      <td style="text-align: right">engine to be used for processing templates. Handlebars is the default.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">ext</td>
+      <td style="text-align: right">extension to be used for dest files.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+<br />
+<br /></p>
 
 <h2 id="links">Links</h2>
 
-<p>There are two ways to create links.</p>
+<h3 id="basic-link">Basic link</h3>
 
-<pre><code class="language-no-highlight">[I'm an inline-style link](https://www.google.com)
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nv">Assemble</span><span class="p">](</span><span class="sx">http://assemble.io</span><span class="p">)</span>
+</code></pre></div></div>
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+<p>Renders to (hover over the link, there is no tooltip):</p>
 
-[I'm a reference-style link][Arbitrary case-insensitive reference text]
+<p><a href="http://assemble.io">Assemble</a></p>
 
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
+<p>HTML:</p>
 
-[You can use numbers for reference-style link definitions][1]
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://assemble.io"</span><span class="nt">&gt;</span>Assemble<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
 
-Or leave it empty and use the [link text itself].
+<h3 id="add-a-title">Add a title</h3>
 
-URLs and URLs in angle brackets will automatically get turned into links. 
-http://www.example.com or &lt;http://www.example.com&gt; and sometimes 
-example.com (but not on Github, for example).
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nv">Upstage</span><span class="p">](</span><span class="sx">https://github.com/upstage/</span> <span class="nn">"Visit Upstage!"</span><span class="p">)</span>
+</code></pre></div></div>
 
-Some text to show that the reference links can follow later.
+<p>Renders to (hover over the link, there should be a tooltip):</p>
 
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-</code></pre>
+<p><a href="https://github.com/upstage/" title="Visit Upstage!">Upstage</a></p>
 
-<p><a href="https://www.google.com">I’m an inline-style link</a></p>
+<p>HTML:</p>
 
-<p><a href="https://www.google.com" title="Google's Homepage">I’m an inline-style link with title</a></p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/upstage/"</span> <span class="na">title=</span><span class="s">"Visit Upstage!"</span><span class="nt">&gt;</span>Upstage<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
 
-<p><a href="https://www.mozilla.org">I’m a reference-style link</a></p>
+<h3 id="named-anchors">Named Anchors</h3>
 
-<p><a href="../blob/master/LICENSE">I’m a relative reference to a repository file</a></p>
+<p>Named anchors enable you to jump to the specified anchor point on the same page. For example, each of these chapters:</p>
 
-<p><a href="http://slashdot.org">You can use numbers for reference-style link definitions</a></p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Table of Contents</span>
+<span class="p">  *</span> <span class="p">[</span><span class="nv">Chapter 1</span><span class="p">](</span><span class="sx">#chapter-1</span><span class="p">)</span>
+<span class="p">  *</span> <span class="p">[</span><span class="nv">Chapter 2</span><span class="p">](</span><span class="sx">#chapter-2</span><span class="p">)</span>
+<span class="p">  *</span> <span class="p">[</span><span class="nv">Chapter 3</span><span class="p">](</span><span class="sx">#chapter-3</span><span class="p">)</span>
+</code></pre></div></div>
+<p>will jump to these sections:</p>
 
-<p>Or leave it empty and use the <a href="http://www.reddit.com">link text itself</a>.</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## Chapter 1 &lt;a id="chapter-1"&gt;&lt;/a&gt;</span>
+Content for chapter one.
 
-<p>URLs and URLs in angle brackets will automatically get turned into links. 
-http://www.example.com or <a href="http://www.example.com">http://www.example.com</a> and sometimes 
-example.com (but not on Github, for example).</p>
+<span class="gu">## Chapter 2 &lt;a id="chapter-2"&gt;&lt;/a&gt;</span>
+Content for chapter one.
 
-<p>Some text to show that the reference links can follow later.</p>
+<span class="gu">## Chapter 3 &lt;a id="chapter-3"&gt;&lt;/a&gt;</span>
+Content for chapter one.
+</code></pre></div></div>
+<p><strong>NOTE</strong> that specific placement of the anchor tag seems to be arbitrary. They are placed inline here since it seems to be unobtrusive, and it works.</p>
+
+<p><br />
+<br />
+<br /></p>
 
 <h2 id="images">Images</h2>
+<p>Images have a similar syntax to links but include a preceding exclamation point.</p>
 
-<pre><code class="language-no-highlight">Here's our logo (hover to see the title text):
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">octocat</span><span class="p">](</span><span class="sx">https://octodex.github.com/images/twenty-percent-cooler-octocat.png</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img src="https://octodex.github.com/images/twenty-percent-cooler-octocat.png" alt="octocat" /></p>
 
-Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+<p>or</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">Alt text</span><span class="p">](</span><span class="sx">http://octodex.github.com/images/stormtroopocat.jpg</span> <span class="nn">"The Stormtroopocat"</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img src="http://octodex.github.com/images/stormtroopocat.jpg" alt="Alt text" title="The Stormtroopocat" /></p>
 
-Reference-style: 
-![alt text][logo]
+<p>Like links, Images also have a footnote style syntax</p>
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
-</code></pre>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">Alt text</span><span class="p">][</span><span class="ss">id</span><span class="p">]</span>
+</code></pre></div></div>
+<p><img src="http://octodex.github.com/images/dojocat.jpg" alt="Alt text" title="The Dojocat" /></p>
 
-<p>Here’s our logo (hover to see the title text):</p>
+<p>With a reference later in the document defining the URL location:</p>
 
-<p>Inline-style: 
-<img src="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" alt="alt text" title="Logo Title Text 1" /></p>
-
-<p>Reference-style: 
-<img src="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" alt="alt text" title="Logo Title Text 2" /></p>
-
-<h2 id="code-and-syntax-highlighting">Code and Syntax Highlighting</h2>
-
-<p>Code blocks are part of the Markdown spec, but syntax highlighting isn’t. However, many renderers – like Github’s and <em>Markdown Here</em> – support syntax highlighting. Which languages are supported and how those language names should be written will vary from renderer to renderer. <em>Markdown Here</em> supports highlighting for dozens of languages (and not-really-languages, like diffs and HTTP headers); to see the complete list, and how to write the language names, see the <a href="http://softwaremaniacs.org/media/soft/highlight/test.html">highlight.js demo page</a>.</p>
-
-<pre><code class="language-no-highlight">Inline `code` has `back-ticks around` it.
-</code></pre>
-
-<p>Inline <code class="highlighter-rouge">code</code> has <code class="highlighter-rouge">back-ticks around</code> it.</p>
-
-<p>Blocks of code are either fenced by lines with three back-ticks <code>```</code>, or are indented with four spaces. I recommend only using the fenced code blocks – they’re easier and only they support syntax highlighting.</p>
-
-<pre lang="no-highlight"><code>```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
- 
-```python
-s = "Python syntax highlighting"
-print s
-```
- 
-```
-No language indicated, so no syntax highlighting. 
-But let's throw in a &lt;b&gt;tag&lt;/b&gt;.
-```
-</code></pre>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="s2">"JavaScript syntax highlighting"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[id]: http://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">"Python syntax highlighting"</span>
-<span class="k">print</span> <span class="n">s</span>
-</code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No language indicated, so no syntax highlighting in Markdown Here (varies on Github). 
-But let's throw in a &lt;b&gt;tag&lt;/b&gt;.
-</code></pre></div></div>
-
-<h2 id="tables">Tables</h2>
-
-<p>Tables aren’t part of the core Markdown spec, but they are part of GFM and <em>Markdown Here</em> supports them. They are an easy way of adding tables to your email – a task that would otherwise require copy-pasting from another application.</p>
-
-<pre><code class="language-no-highlight">Colons can be used to align columns.
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the 
-raw Markdown line up prettily. You can also use inline Markdown.
-
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
-</code></pre>
-
-<p>Colons can be used to align columns.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Tables</th>
-      <th style="text-align: center">Are</th>
-      <th style="text-align: right">Cool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>col 3 is</td>
-      <td style="text-align: center">right-aligned</td>
-      <td style="text-align: right">$1600</td>
-    </tr>
-    <tr>
-      <td>col 2 is</td>
-      <td style="text-align: center">centered</td>
-      <td style="text-align: right">$12</td>
-    </tr>
-    <tr>
-      <td>zebra stripes</td>
-      <td style="text-align: center">are neat</td>
-      <td style="text-align: right">$1</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-      <td>There must be at least 3 dashes separating each header cell. The outer pipes (</td>
-      <td>) are optional, and you don’t need to make the raw Markdown line up prettily. You can also use inline Markdown.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th>Markdown</th>
-      <th>Less</th>
-      <th>Pretty</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><em>Still</em></td>
-      <td><code class="highlighter-rouge">renders</code></td>
-      <td><strong>nicely</strong></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="blockquotes">Blockquotes</h2>
-
-<pre><code class="language-no-highlight">&gt; Blockquotes are very handy in email to emulate reply text.
-&gt; This line is part of the same quote.
-
-Quote break.
-
-&gt; This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote. 
-</code></pre>
-
-<blockquote>
-  <p>Blockquotes are very handy in email to emulate reply text.
-This line is part of the same quote.</p>
-</blockquote>
-
-<p>Quote break.</p>
-
-<blockquote>
-  <p>This is a very long line that will still be quoted properly when it wraps. Oh boy let’s keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can <em>put</em> <strong>Markdown</strong> into a blockquote.</p>
-</blockquote>
-
-<h2 id="inline-html">Inline HTML</h2>
-
-<p>You can also use raw HTML in your Markdown, and it’ll mostly work pretty well.</p>
-
-<pre><code class="language-no-highlight">&lt;dl&gt;
-  &lt;dt&gt;Definition list&lt;/dt&gt;
-  &lt;dd&gt;Is something people use sometimes.&lt;/dd&gt;
-
-  &lt;dt&gt;Markdown in HTML&lt;/dt&gt;
-  &lt;dd&gt;Does *not* work **very** well. Use HTML &lt;em&gt;tags&lt;/em&gt;.&lt;/dd&gt;
-&lt;/dl&gt;
-</code></pre>
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
-<h2 id="horizontal-rule">Horizontal Rule</h2>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Three or more...
-
----
-
-Hyphens
-
-***
-
-Asterisks
-
-___
-
-Underscores
-</code></pre></div></div>
-
-<p>Three or more…</p>
-
-<hr />
-
-<p>Hyphens</p>
-
-<hr />
-
-<p>Asterisks</p>
-
-<hr />
-
-<p>Underscores</p>
-
-<h2 id="line-breaks">Line Breaks</h2>
-
-<p>My basic recommendation for learning how line breaks work is to experiment and discover – hit &lt;Enter&gt; once (i.e., insert one newline), then hit it twice (i.e., insert two newlines), see what happens. You’ll soon learn to get what you want. “Markdown Toggle” is your friend.</p>
-
-<p>Here are some things to try out:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a *separate paragraph*.
-
-This line is also a separate paragraph, but...
-This line is only separated by a single newline, so it's a separate line in the *same paragraph*.
-</code></pre></div></div>
-
-<p>Here’s a line for us to start with.</p>
-
-<p>This line is separated from the one above by two newlines, so it will be a <em>separate paragraph</em>.</p>
-
-<p>This line is also begins a separate paragraph, but…<br />
-This line is only separated by a single newline, so it’s a separate line in the <em>same paragraph</em>.</p>
-
-<p>(Technical note: <em>Markdown Here</em> uses GFM line breaks, so there’s no need to use MD’s two-space line breaks.)</p>
-
-<h2 id="youtube-videos">YouTube Videos</h2>
-
-<p>They can’t be added directly but you can add an image with a link to the video like this:</p>
-
-<pre><code class="language-no-highlight">&lt;a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=YOUTUBE_VIDEO_ID_HERE
-" target="_blank"&gt;&lt;img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /&gt;&lt;/a&gt;
-</code></pre>
-
-<p>Or, in pure Markdown, but losing the image sizing and border:</p>
-
-<pre><code class="language-no-highlight">[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
-</code></pre>
-
-<p>Referencing a bug by #bugID in your git commit links it to the slip. For example #1.</p>
-
-<hr />
-
-<p>License: <a href="https://creativecommons.org/licenses/by/3.0/">CC-BY</a></p>
 
 
       
