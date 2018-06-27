@@ -20,24 +20,16 @@
   -->
 
 
-[Markdown Cheatsheet](pages/MarkdownCheatsheet.md)
+[Markdown Cheatsheet](pages/markdownCheatsheet.md)
 [Download](pages/download.md)
-[Menu Item 1]()
+[Help & About]()
 
-  * # SubMenu Heading 1
-  * [SubMenu Item 1](pages/subitem1.md)
-  * [SubMenu Item 2](pages/subitem2.md)
-  - - - -
-  * # SubMenu Heading 2
-  * [SubMenu Item 3](pages/subitem3.md)
-  - - - -
-  * # SubMenu Heading 3
-  * [SubMenu Item 3](pages/subitem3.md)
+  * [About](pages/about.md)
+  * [Help](pages/readme.md)
+
 
 
 <!-- [gimmick:themechooser](Choose theme) -->
-[About](pages/about.md)
-
 
 <!-- A more complex navigation example: ----------------------------------------
 
