@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Tor-Pi | wiki</title>
+<meta name="generator" content="Jekyll v3.7.3" />
+<meta property="og:title" content="Tor-Pi" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/en-US/pages/guides/raspberry-pi/TOR-Pi.html" />
+<meta property="og:url" content="http://localhost:4000/en-US/pages/guides/raspberry-pi/TOR-Pi.html" />
+<meta property="og:site_name" content="wiki" />
+<script type="application/ld+json">
+{"headline":"Tor-Pi","url":"http://localhost:4000/en-US/pages/guides/raspberry-pi/TOR-Pi.html","@type":"WebPage","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=923ee4f85fb143264ee4f090058d54fa91c08513">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">wiki</a></h1>
+      
+
+      
+<h1 id="tor-pi">Tor-Pi</h1>
+
+<h2 id="network-flow">Network Flow:</h2>
+
+<h4 id="router--ethernet-port-on-raspberry--tor-service--raspberry-wifi-ac--wifi-client">Router ⇆ Ethernet Port on Raspberry ⇆ TOR Service ⇆ Raspberry WIFI AC ⇆ WIFI CLIENT</h4>
+
+<h2 id="preperation">Preperation</h2>
+
+<ul>
+  <li>Download Rasbian Strech Lite from: <a href="https://www.raspberrypi.org/downloads/raspbian/">raspberrypi.org</a></li>
+  <li>Burn Image to SD-Card.</li>
+  <li>Boot Raspberry Pi 3.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get upgrade <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get install git 
+<span class="nb">sudo </span>raspi-config
+</code></pre></div></div>
+<p>Change User Password within the Config Interface
+Enable SSH In Interface Options</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>reboot
+</code></pre></div></div>
+
+<h2 id="wifi-hotspot-configuration">Wifi Hotspot Configuration</h2>
+
+<p>SSH TO Raspberry Pi 3</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh pi@raspberry_host
+git clone https://github.com/unixabg/RPI-Wireless-Hotspot.git
+<span class="nb">cd </span>RPI-Wireless-Hotspot
+<span class="nb">sudo</span> ./install
+</code></pre></div></div>
+
+<p>“Y” to agree to terms
+“Y” to use preconfigured DNS
+“Y” to use Unblock-Us DNS servers
+“N” for WiFi defaults
+Type in a new WiFi password (it will be checked)
+Type in a new SSID
+Type in your desired WiFi channel (1, 6, 11)
+Type “N” when asked - “Are you using a rtl871x chipset?”
+Type “N” for chromecast support (unless you plan to use a chromecast w/RasTor)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>reboot
+<span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get upgrade
+</code></pre></div></div>
+
+<h2 id="testing-wifi-hotspot">Testing Wifi Hotspot</h2>
+
+<p>Connect to new SSID with a Phone and check if you have full Internet Connection.</p>
+
+<h2 id="installing-tor-service">Installing Tor Service</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get install tor
+<span class="nb">sudo </span>nano /etc/tor/torrc
+</code></pre></div></div>
+
+<p>Add the following just below the first set of comments:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Log notice file /var/log/tor/notices.log
+VirtualAddrNetwork 10.192.0.0/10
+AutomapHostsSuffixes .onion,.exit
+AutomapHostsOnResolve 1
+TransPort 9040
+TransListenAddress 192.168.42.1
+DNSPort 53
+DNSListenAddress 192.168.42.1
+</code></pre></div></div>
+
+<h2 id="configure-iptables">Configure iptables:</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>iptables <span class="nt">-F</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>iptables <span class="nt">-t</span> nat <span class="nt">-F</span>
+<span class="nb">sudo </span>iptables <span class="nt">-t</span> nat <span class="nt">-A</span> PREROUTING <span class="nt">-i</span> wlan0 <span class="nt">-p</span> udp <span class="nt">--dport</span> 53 <span class="nt">-j</span> REDIRECT <span class="nt">--to-ports</span> 53
+<span class="nb">sudo </span>iptables <span class="nt">-t</span> nat <span class="nt">-A</span> PREROUTING <span class="nt">-i</span> wlan0 <span class="nt">-p</span> tcp <span class="nt">--syn</span> <span class="nt">-j</span> REDIRECT <span class="nt">--to-ports</span> 9040
+</code></pre></div></div>
+
+<p>Check iptables routes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>iptables <span class="nt">-t</span> nat <span class="nt">-L</span>
+</code></pre></div></div>
+<p>if all routs looks like about run this command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s2">"iptables-save &gt; /etc/iptables.ipv4.nat"</span>
+</code></pre></div></div>
+
+<p>##Create log file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>touch /var/log/tor/notices.log 
+<span class="nb">sudo </span>chown debian-tor /var/log/tor/notices.log <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>chmod 644 /var/log/tor/notices.log
+</code></pre></div></div>
+
+<h2 id="testing-and-finishes">Testing and finishes</h2>
+
+<p>Start TOR service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service tor start
+</code></pre></div></div>
+
+<p>Check to see if the service is running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service tor status
+</code></pre></div></div>
+
+<p>Run TOR Service at Boot:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>update-rc.d tor <span class="nb">enable
+sudo </span>reboot
+</code></pre></div></div>
+
+<p>Test for TOR service is running after reboot, connect to the TOR WIFI.</p>
+
+<p>##Optional: Install Monit Service to reload Tor Serivce if Down</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get install monit
+<span class="nb">sudo </span>nano /etc/monit/monitrc
+</code></pre></div></div>
+
+<p>Add those lines to the end of the config:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>check process gdm with pidfile /var/run/tor/tor.pid
+   start program = "/etc/init.d/tor start"
+   stop program = "/etc/init.d/tor stop"
+</code></pre></div></div>
+
+<p>Realod and add Monit to startup:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>monit reaload
+<span class="nb">sudo </span>update-rc.d monit <span class="nb">enable</span>
+</code></pre></div></div>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>

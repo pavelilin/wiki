@@ -56,8 +56,20 @@ Combined emphasis with **asterisks and _underscores_**.
 Strikethrough uses two tildes. ~~Scratch this.~~
 
 
-
 ## Lists
+
+
+- George Washington
+- John Adams
+- Thomas Jefferson
++ Chima İlker
++ Siddharth Saifullah
+* John Adams
+* Gobinda Claribel
+
+1. James Madison
+2. James Monroe
+3. John Quincy Adams
 
 (In this example, leading and trailing spaces are shown with with dots: ⋅)
 
@@ -75,9 +87,6 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 ⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
 ⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
 
-* Unordered list can use asterisks
-- Or minuses
-+ Or pluses
 ```
 
 1. First ordered list item
@@ -93,9 +102,7 @@ Strikethrough uses two tildes. ~~Scratch this.~~
    Note that this line is separate, but within the same paragraph.  
    (This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
 
-* Unordered list can use asterisks
-- Or minuses
-+ Or pluses
+
 
 
 ## Links

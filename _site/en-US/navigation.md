@@ -22,7 +22,11 @@
 
 [Guides]()
 
-  * [first](pages/guides/first.md)
+  * # Raspberry Pi
+  * [TOR-Pi](pages/guides/raspberry-pi/TOR-Pi.md)
+  - - - -
+  * # Section 2
+  * [Guide Demo](pages/guides/guide-demo.md)
 
 [Help & About]()
 
