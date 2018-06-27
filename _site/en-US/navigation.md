@@ -20,12 +20,15 @@
   -->
 
 
-[Markdown Cheatsheet](pages/markdownCheatsheet.md)
-[Guides](pages/guides.md)
+[Guides]()
+
   * [first](pages/guides/first.md)
+
 [Help & About]()
-  * [About](pages/about/about.md)
-  * [Help](pages/about/readme.md)
+
+  * [About](pages/info/about.md)
+  * [Markdown Cheatsheet](pages/info/markdownCheatsheet.md)
+  * [Readme](pages/info/readme.md)
 
 
 
