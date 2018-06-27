@@ -19,7 +19,8 @@
   -- (Read: http://dynalon.github.io/mdwiki/#!quickstart.md#Adding_a_navigation)
   -->
 
-[markdown](pages/markdown.md)
+
+[Markdown Cheatsheet](pages/MarkdownCheatsheet.md)
 [Download](pages/download.md)
 [Menu Item 1]()
 
