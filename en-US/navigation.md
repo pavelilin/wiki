@@ -18,6 +18,14 @@
   -- Navigation
   -- (Read: http://dynalon.github.io/mdwiki/#!quickstart.md#Adding_a_navigation)
   -->
+  
+[Guides]()
+
+  * # Raspberry Pi
+  * [TOR-Pi](pages/guides/raspberry-pi/TOR-Pi.md)
+  - - - -
+  * # Section 2
+  * [Guide Demo](pages/guides/guide-demo.md)
 
 [MacOS]()
 
@@ -56,13 +64,6 @@
 * [Extentions](pages/firefox/firefoxhromeExtensions.md)
 
 
-[Guides]()
-
-  * # Raspberry Pi
-  * [TOR-Pi](pages/guides/raspberry-pi/TOR-Pi.md)
-  - - - -
-  * # Section 2
-  * [Guide Demo](pages/guides/guide-demo.md)
 
 [Help & About]()
 
