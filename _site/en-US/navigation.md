@@ -19,6 +19,42 @@
   -- (Read: http://dynalon.github.io/mdwiki/#!quickstart.md#Adding_a_navigation)
   -->
 
+[MacOS]()
+
+* [Tips & Tricks](pages/macOS/macTipsTricks.md)
+* [Software](pages/macOS/macSoftware.md)
+
+[Linux]()
+
+* [Tips & Tricks](pages/linux/linuxTipsTricks.md)
+* [Software](pages/linux/linuxSoftware.md)
+
+
+[Windows]()
+
+* [Tips & Tricks](pages/windows/winTipsTricks.md)
+* [Software](pages/windows/winSoftware.md)
+
+[iOS]()
+
+* [Tips & Tricks](pages/ios/iosTipsTricks.md)
+* [Apps](pages/ios/iosApps.md)
+
+[Android]()
+
+* [Tips & Tricks](pages/android/androidTipsTricks.md)
+* [Apps](pages/android/androidApps.md)
+
+[Chrome]()
+
+* [Tips & Tricks](pages/chrome/chromeTipsTricks.md)
+* [Extensions](pages/Chrome/chromeExtensions.md)
+
+[Firefox]()
+
+* [Tips & Tricks](pages/firefox/firefoxTipsTricks.md)
+* [Extentions](pages/firefox/firefoxhromeExtensions.md)
+
 
 [Guides]()
 
