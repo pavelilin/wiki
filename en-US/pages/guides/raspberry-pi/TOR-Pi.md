@@ -143,6 +143,6 @@ check process gdm with pidfile /var/run/tor/tor.pid
 Realod and add Monit to startup:
 
 ```bash
-sudo monit reaload
+sudo monit reload
 sudo update-rc.d monit enable
 ```
