@@ -11,7 +11,7 @@
   -- (Read: http://dynalon.github.io/mdwiki/#!customizing.md#Theme_chooser)
   -->
 
-<!-- [gimmick:theme](flatly) -->
+[gimmick:theme](cosmo)
 
 
 <!--
@@ -34,7 +34,7 @@
   * [SubMenu Item 3](pages/subitem3.md)
 
 
-[gimmick:themechooser](Choose theme)
+<!-- [gimmick:themechooser](Choose theme) -->
 [About](pages/about.md)
 
 
