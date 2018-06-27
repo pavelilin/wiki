@@ -18,7 +18,7 @@
   -- Navigation
   -- (Read: http://dynalon.github.io/mdwiki/#!quickstart.md#Adding_a_navigation)
   -->
-  
+
 [Guides]()
 
   * # Raspberry Pi
@@ -56,7 +56,7 @@
 [Chrome]()
 
 * [Tips & Tricks](pages/chrome/chromeTipsTricks.md)
-* [Extensions](pages/Chrome/chromeExtensions.md)
+* [Extensions](pages/chrome/chromeExtensions.md)
 
 [Firefox]()
 
