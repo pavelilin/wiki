@@ -21,11 +21,11 @@
 
 
 [Markdown Cheatsheet](pages/markdownCheatsheet.md)
-[Download](pages/download.md)
+[Guides](pages/guides.md)
+  * [first](pages/guides/first.md)
 [Help & About]()
-
-  * [About](pages/about.md)
-  * [Help](pages/readme.md)
+  * [About](pages/about/about.md)
+  * [Help](pages/about/readme.md)
 
 
 
