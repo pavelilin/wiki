@@ -1,5 +1,5 @@
-# [Linux Tips & Tricks](https://github.com/fire1ce/wiki/blob/gh-pages/en-US/pages/linux/linuxTipsTricks.md)
-
+# Linux Tips & Tricks
+<!-- [Linux Tips & Tricks](https://github.com/fire1ce/wiki/blob/gh-pages/en-US/pages/linux/linuxTipsTricks.md) -->
 ## Wordpress login attack check
 
 ```bash
