@@ -29,24 +29,33 @@
 
 [MacOS]()
 
-* [Tips & Tricks](pages/macOS/macTipsTricks.md)
-* [Software](pages/macOS/macSoftware.md)
+  * [Tips & Tricks](pages/macOS/macTipsTricks.md)
+  * [Software](pages/macOS/macSoftware.md)
 
 [Linux]()
 
-* [Tips & Tricks](pages/linux/linuxTipsTricks.md)
-* [Software](pages/linux/linuxSoftware.md)
+  * # Tips & Tricks
+  * [General](pages/linux/general.md)
+  * [cPanel & WHM ](pages/linux/cpanel.md)
+  * [CSF Firewall](pages/linux/csf.md)
+  * [Nginx](pages/linux/nginx.md)
+  * [Apache](pages/linux/apache.md)
+  * [Sophos Firewall](pages/linux/sophos.md)
+  * [Wordpress](pages/linux/wordpress.md)
+  * [Esxi](pages/linux/esxi.md)
+  - - - -
+  * [Software](pages/linux/linuxSoftware.md)
 
 
 [Windows]()
 
-* [Tips & Tricks](pages/windows/winTipsTricks.md)
-* [Software](pages/windows/winSoftware.md)
+  * [Tips & Tricks](pages/windows/winTipsTricks.md)
+  * [Software](pages/windows/winSoftware.md)
 
 [iOS]()
 
-* [Tips & Tricks](pages/ios/iosTipsTricks.md)
-* [Apps](pages/ios/iosApps.md)
+  * [Tips & Tricks](pages/ios/iosTipsTricks.md)
+  * [Apps](pages/ios/iosApps.md)
 
 [Android]()
 
