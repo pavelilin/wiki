@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>wiki</title>
+<title>Apache | wiki</title>
 <meta name="generator" content="Jekyll v3.7.3" />
-<meta property="og:title" content="wiki" />
+<meta property="og:title" content="Apache" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="http://localhost:4000/en-US/pages/linux/apache.html" />
 <meta property="og:url" content="http://localhost:4000/en-US/pages/linux/apache.html" />
 <meta property="og:site_name" content="wiki" />
 <script type="application/ld+json">
-{"headline":"wiki","url":"http://localhost:4000/en-US/pages/linux/apache.html","@type":"WebPage","@context":"http://schema.org"}</script>
+{"headline":"Apache","url":"http://localhost:4000/en-US/pages/linux/apache.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
@@ -25,7 +25,12 @@
       <h1><a href="http://localhost:4000/">wiki</a></h1>
       
 
-      
+      <h1 id="apache">Apache</h1>
+
+<h2 id="apache-memory-usage">Apache memory usage</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps <span class="nt">-ylC</span> httpd | awk <span class="s1">'{x += $8;y += 1} END {print "Apache Memory Usage (MB): "x/1024; print "Average Proccess Size (MB): "x/((y-1)*1024)}'</span>
+</code></pre></div></div>
 
 
       

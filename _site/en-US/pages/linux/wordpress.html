@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>wiki</title>
+<title>WordPress | wiki</title>
 <meta name="generator" content="Jekyll v3.7.3" />
-<meta property="og:title" content="wiki" />
+<meta property="og:title" content="WordPress" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="http://localhost:4000/en-US/pages/linux/wordpress.html" />
 <meta property="og:url" content="http://localhost:4000/en-US/pages/linux/wordpress.html" />
 <meta property="og:site_name" content="wiki" />
 <script type="application/ld+json">
-{"headline":"wiki","url":"http://localhost:4000/en-US/pages/linux/wordpress.html","@type":"WebPage","@context":"http://schema.org"}</script>
+{"headline":"WordPress","url":"http://localhost:4000/en-US/pages/linux/wordpress.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
@@ -25,7 +25,44 @@
       <h1><a href="http://localhost:4000/">wiki</a></h1>
       
 
-      
+      <h1 id="wordpress">WordPress</h1>
+
+<h2 id="wordpress-login-attack-check">Wordpress login attack check</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Crontab :
+0 <span class="k">*</span>/6 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>  sh /root/wplogin.sh
+
+Script :
+<span class="c">#!/bin/bash</span>
+
+<span class="c">###start editing</span>
+<span class="nv">thold</span><span class="o">=</span><span class="s2">"100"</span>
+<span class="nv">btime</span><span class="o">=</span><span class="s2">"359m"</span>
+<span class="c">###stop editing</span>
+
+egrep <span class="s1">'wp-login.php'</span> /usr/local/apache/domlogs/<span class="k">*</span> | <span class="nb">grep</span> <span class="nt">-v</span> ftp_log | awk <span class="nt">-F</span> : <span class="s1">'{print $2}'</span> | awk <span class="s1">'{print $1}'</span> | sort | uniq <span class="nt">-c</span> | sort <span class="nt">-n</span> | awk <span class="nt">-v</span> <span class="nv">limit</span><span class="o">=</span><span class="s2">"</span><span class="nv">$thold</span><span class="s2">"</span> <span class="s1">'$1 &gt; limit{print $2}'</span> <span class="o">&gt;</span> <span class="nv">$$</span>_ip_<span class="nv">$$</span>
+
+<span class="k">while </span><span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> <span class="nt">-r</span> line
+        <span class="k">do</span>
+                /usr/sbin/csf <span class="nt">-td</span> <span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span>  <span class="s2">"</span><span class="nv">$btime</span><span class="s2">"</span> <span class="s2">"banned for wordpress attack"</span>
+        <span class="k">done</span> &lt; <span class="nv">$$</span>_ip_<span class="nv">$$</span>
+rm <span class="nt">-f</span> <span class="nv">$$</span>_ip_<span class="nv">$$</span>
+</code></pre></div></div>
+
+<h2 id="wordpress-pingback">Wordpress pingback</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># WordPress Pingback Request Denial</span>
+<span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~<span class="k">*</span> <span class="s2">"WordPress"</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return </span>403<span class="p">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Apache:
+BrowserMatchNoCase WordPress wordpress_ping
+BrowserMatchNoCase Wordpress wordpress_ping
+Order Deny,Allow
+Deny from env=wordpress_ping</p>
+
 
 
       

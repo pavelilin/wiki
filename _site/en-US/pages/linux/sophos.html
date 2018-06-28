@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>wiki</title>
+<title>Sophos Firewall | wiki</title>
 <meta name="generator" content="Jekyll v3.7.3" />
-<meta property="og:title" content="wiki" />
+<meta property="og:title" content="Sophos Firewall" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="http://localhost:4000/en-US/pages/linux/sophos.html" />
 <meta property="og:url" content="http://localhost:4000/en-US/pages/linux/sophos.html" />
 <meta property="og:site_name" content="wiki" />
 <script type="application/ld+json">
-{"headline":"wiki","url":"http://localhost:4000/en-US/pages/linux/sophos.html","@type":"WebPage","@context":"http://schema.org"}</script>
+{"headline":"Sophos Firewall","url":"http://localhost:4000/en-US/pages/linux/sophos.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
@@ -25,7 +25,31 @@
       <h1><a href="http://localhost:4000/">wiki</a></h1>
       
 
-      
+      <h1 id="sophos-firewall">Sophos Firewall</h1>
+
+<h2 id="rebuild-sophos-when-disk-full">Rebuild Sophos when disk full</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/init.d/postgresql92 rebuild
+</code></pre></div></div>
+
+<p>On older versions:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/mdw/scripts/smtp stop
+dropdb <span class="nt">-U</span> postgres smtp
+createdb <span class="nt">-U</span> postgres smtp
+/var/mdw/scripts/smtp start
+</code></pre></div></div>
+
+<h2 id="clear-allowed-networks-on-sophos">Clear allowed networks on Sophos</h2>
+
+<p>Login to the Sophos</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Type ‘cc’
+In cc, you’ll be <span class="k">in </span>MAIN, <span class="k">if </span>not, <span class="nb">type</span> ‘MAIN’
+Type ‘webadmin<span class="s1">'
+Type ‘allowed_networks@'</span>
+<span class="o">=[</span><span class="s1">'REF_NetworkAny'</span><span class="o">]</span>
+</code></pre></div></div>
 
 
       

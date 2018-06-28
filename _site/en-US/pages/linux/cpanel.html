@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>wiki</title>
+<title>cPanel &amp; WHM | wiki</title>
 <meta name="generator" content="Jekyll v3.7.3" />
-<meta property="og:title" content="wiki" />
+<meta property="og:title" content="cPanel &amp; WHM" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="http://localhost:4000/en-US/pages/linux/cpanel.html" />
 <meta property="og:url" content="http://localhost:4000/en-US/pages/linux/cpanel.html" />
 <meta property="og:site_name" content="wiki" />
 <script type="application/ld+json">
-{"headline":"wiki","url":"http://localhost:4000/en-US/pages/linux/cpanel.html","@type":"WebPage","@context":"http://schema.org"}</script>
+{"headline":"cPanel &amp; WHM","url":"http://localhost:4000/en-US/pages/linux/cpanel.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
@@ -25,7 +25,77 @@
       <h1><a href="http://localhost:4000/">wiki</a></h1>
       
 
-      
+      <h1 id="cpanel--whm">cPanel &amp; WHM</h1>
+
+<h2 id="whm-replica">WHM replica</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rsync <span class="nt">-avz</span> 192.168.1.122:/home/ /home/ <span class="nt">--exclude</span><span class="o">=</span><span class="s2">"virtfs"</span> <span class="nt">--exclude</span><span class="o">=</span><span class="s2">"</span><span class="se">\.</span><span class="s2">cp*"</span> <span class="nt">--exclude</span><span class="o">=</span><span class="s2">"cpeasyapache"</span> 
+rsync <span class="nt">-avz</span> 192.168.1.122:/usr/local/apache/conf/ /usr/local/apache/conf/
+rsync <span class="nt">-avz</span> 192.168.1.122:/var/named/ /var/named/
+rsync <span class="nt">-avz</span> 192.168.1.122:/usr/local/cpanel/ /usr/local/cpanel/
+rsync <span class="nt">-avz</span> 192.168.1.122:/var/cpanel/ /var/cpanel
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig cpanel off
+chkconfig exim off
+chkconfig dovecot off
+chkconfig pure-ftpd off
+chkconfig named off
+chkconfig mysql off
+chkconfig csf off
+chkconfig iptables off
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname: /etc/sysconfig/network
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>change shared ip - You can change it <span class="k">in</span> /etc/wwwacct.conf infront of ADDR parameter.
+change ip - Usage: /usr/local/cpanel/bin/setsiteip <span class="o">[</span><span class="nt">-u</span> user | domain] ip   <span class="o">(</span>/etc/trueuserowners<span class="o">)</span>
+rebuild httpd conf
+restart apache
+</code></pre></div></div>
+
+<h2 id="disable-core-files-in-cpanel-account">Disable core files in CPanel account</h2>
+
+<p>Add this in /etc/sysctl.conf</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel.core_uses_pid <span class="o">=</span> 0
+kernel.core_pattern <span class="o">=</span> /dev/null
+</code></pre></div></div>
+
+<p>And then run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sysctl <span class="nt">-p</span>
+</code></pre></div></div>
+
+<h2 id="add-hsts-support-in-cpanel">Add HSTS support in CPANEL</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp <span class="nt">-p</span> /var/cpanel/templates/apache2_4/ssl_vhost.default /var/cpanel/templates/apache2_4/ssl_vhost.local
+vi /var/cpanel/templates/apache2_4/ssl_vhost.local
+</code></pre></div></div>
+
+<p>Edit:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;VirtualHost[% FOREACH ipblock IN vhost.ips %] <span class="o">[</span>% ipblock.ip %]:[% ipblock.port %][% END %]&gt;
+ <span class="c"># Enable HTTP Strict Transport Security</span>
+ Header always <span class="nb">set </span>Strict-Transport-Security <span class="s2">"max-age=63072000; includeSubdomains;"</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp <span class="nt">-p</span> /var/cpanel/templates/apache2_4/main.default /var/cpanel/templates/apache2_4/main.local
+vi /var/cpanel/templates/apache2_4/main.local
+</code></pre></div></div>
+
+<p>Edit:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>% IF main.sslprotocol.item.sslprotocol.length %]SSLProtocol <span class="o">[</span>% main.sslprotocol.item.sslprotocol %][% END %]
+SSLHonorCipherOrder on
+</code></pre></div></div>
+
+<p>Run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/scripts/rebuildhttpdconf
+service httpd restart
+</code></pre></div></div>
 
 
       

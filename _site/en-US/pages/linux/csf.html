@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>wiki</title>
+<title>CSF Firewall | wiki</title>
 <meta name="generator" content="Jekyll v3.7.3" />
-<meta property="og:title" content="wiki" />
+<meta property="og:title" content="CSF Firewall" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="http://localhost:4000/en-US/pages/linux/csf.html" />
 <meta property="og:url" content="http://localhost:4000/en-US/pages/linux/csf.html" />
 <meta property="og:site_name" content="wiki" />
 <script type="application/ld+json">
-{"headline":"wiki","url":"http://localhost:4000/en-US/pages/linux/csf.html","@type":"WebPage","@context":"http://schema.org"}</script>
+{"headline":"CSF Firewall","url":"http://localhost:4000/en-US/pages/linux/csf.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
@@ -25,7 +25,41 @@
       <h1><a href="http://localhost:4000/">wiki</a></h1>
       
 
-      
+      <h1 id="csf-firewall">CSF Firewall</h1>
+
+<h2 id="csf-configuration">CSF configuration</h2>
+
+<p>Automated configuration:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/TESTING = "1"/TESTING = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/RESTRICT_SYSLOG = "0"/RESTRICT_SYSLOG = "3"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/IPV6 = "1"/IPV6 = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/IGNORE_ALLOW = "0"/IGNORE_ALLOW = "1"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/CONNLIMIT = ""/CONNLIMIT = "22;5,80;70"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/PORTFLOOD = ""/PORTFLOOD = "22;tcp;5;300,80;tcp;100;1,443;tcp;100;5"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/CT_LIMIT = "0"/CT_LIMIT = "300"/'</span> /etc/csf/csf.conf
+</code></pre></div></div>
+
+<p>Disable LFD alerts: Only if you want to disable them.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/LF_EMAIL_ALERT = "1"/LF_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/LF_SSH_EMAIL_ALERT = "1"/LF_SSH_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/LF_SU_EMAIL_ALERT = "1"/LF_SU_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/LF_WEBMIN_EMAIL_ALERT = "1"/LF_WEBMIN_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/LF_CONSOLE_EMAIL_ALERT = "1"/LF_CONSOLE_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/LT_EMAIL_ALERT = "1"/LT_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/CT_EMAIL_ALERT = "1"/CT_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/PS_EMAIL_ALERT = "1"/PS_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
+</code></pre></div></div>
+
+<p>Disable PT alerts: Only if you want to disable them.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/PT_USERPROC = "10"/PT_USERPROC = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/PT_USERMEM = "256"/PT_USERMEM = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/PT_USERTIME = "1800"/PT_USERTIME = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/PT_USERKILL_ALERT = "1"/PT_USERKILL_ALERT = "0"/'</span> /etc/csf/csf.conf
+sed <span class="nt">-i</span> <span class="s1">'s/PT_LOAD = "30"/PT_LOAD = "0"/'</span> /etc/csf/csf.conf
+</code></pre></div></div>
 
 
       
