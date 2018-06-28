@@ -17,7 +17,7 @@
 {"headline":"CSF Firewall","url":"http://localhost:4000/en-US/pages/linux/csf.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
+    <link rel="stylesheet" href="/assets/css/style.css?v=256f9ed9eb4fbc095bcc4262f9d1cf4aa9f8f2fa">
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
@@ -59,6 +59,31 @@ sed <span class="nt">-i</span> <span class="s1">'s/PT_USERMEM = "256"/PT_USERMEM
 sed <span class="nt">-i</span> <span class="s1">'s/PT_USERTIME = "1800"/PT_USERTIME = "0"/'</span> /etc/csf/csf.conf
 sed <span class="nt">-i</span> <span class="s1">'s/PT_USERKILL_ALERT = "1"/PT_USERKILL_ALERT = "0"/'</span> /etc/csf/csf.conf
 sed <span class="nt">-i</span> <span class="s1">'s/PT_LOAD = "30"/PT_LOAD = "0"/'</span> /etc/csf/csf.conf
+</code></pre></div></div>
+
+<h2 id="csf-gui-on-ispconfig-3">CSF GUI on ISPCONFIG 3</h2>
+
+<p>nstall old CSF (before 8.13)</p>
+
+<p>Copy the ISPCONFIG folder to /etc/csf/ and enable CSF in ISPCONFIG</p>
+
+<p>Backup csfui* files</p>
+
+<p>Upgrade CSF</p>
+
+<p>Copy backuped csfui* files back</p>
+
+<p>Run the following commands:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/checkip/ConfigServer::CheckIP::checkip/g'</span> /usr/local/csf/bin/csfui.pl
+sed <span class="nt">-i</span> <span class="s1">'s/sanity(/ConfigServer::Sanity::sanity(/g'</span> /usr/local/csf/bin/csfui.pl
+</code></pre></div></div>
+
+<h2 id="unblock-invalid-packets-in-csf">Unblock Invalid packets in CSF</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Drop out of order packets and packets in an INVALID state in iptables</span>
+<span class="c"># connection tracking</span>
+PACKET_FILTER <span class="o">=</span> <span class="s2">"0"</span>
 </code></pre></div></div>
 
 

@@ -25,6 +25,8 @@ rm -f $$_ip_$$
 
 ## Wordpress pingback
 
+Nginx:
+
 ```bash
 # WordPress Pingback Request Denial
 if ($http_user_agent ~* "WordPress") {
@@ -33,8 +35,28 @@ if ($http_user_agent ~* "WordPress") {
 ```
 
 Apache:
+
+```bash
 BrowserMatchNoCase WordPress wordpress_ping
 BrowserMatchNoCase Wordpress wordpress_ping
 Order Deny,Allow
 Deny from env=wordpress_ping
+```
 
+
+
+## One-time login to wordpress
+
+Install wp cli:
+
+```bash
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+```
+
+Run from the WordPress installed location:
+
+```bash
+useradmin=`wp user list --role=administrator --format=csv --allow-root | cut -d',' -f2 | head -2 | tail -1` &&  wp plugin install one-time-login --activate --allow-root && wp user one-time-login $useradmin --allow-root && user=$(stat -c "%U" `pwd`) && chown $user.$user wp-content/ -R
+```

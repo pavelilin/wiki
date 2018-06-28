@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>wiki</title>
+<title>Nginx | wiki</title>
 <meta name="generator" content="Jekyll v3.7.3" />
-<meta property="og:title" content="wiki" />
+<meta property="og:title" content="Nginx" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="http://localhost:4000/en-US/pages/linux/nginx.html" />
 <meta property="og:url" content="http://localhost:4000/en-US/pages/linux/nginx.html" />
 <meta property="og:site_name" content="wiki" />
 <script type="application/ld+json">
-{"headline":"wiki","url":"http://localhost:4000/en-US/pages/linux/nginx.html","@type":"WebPage","@context":"http://schema.org"}</script>
+{"headline":"Nginx","url":"http://localhost:4000/en-US/pages/linux/nginx.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
+    <link rel="stylesheet" href="/assets/css/style.css?v=256f9ed9eb4fbc095bcc4262f9d1cf4aa9f8f2fa">
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
@@ -25,7 +25,12 @@
       <h1><a href="http://localhost:4000/">wiki</a></h1>
       
 
-      
+      <h1 id="nginx">Nginx</h1>
+
+<h2 id="show-all-domains-in-nginx-configuration">Show all domains in NGINX configuration</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-e</span> <span class="s2">"^</span><span class="se">\s</span><span class="s2">*server_name"</span> /etc/nginx/conf.d/<span class="k">*</span>|sed <span class="nt">-e</span> <span class="s1">'s/[\t ]*server_name//g;'</span>|sed <span class="nt">-e</span> <span class="s2">"s/ /</span><span class="se">\+</span><span class="s2">/g"</span>|sed <span class="nt">-e</span> <span class="s1">'s/;//g'</span>|while <span class="nb">read </span>line<span class="p">;</span> <span class="k">do for </span>i <span class="k">in</span> <span class="nv">$line</span><span class="p">;</span> <span class="k">do </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"</span><span class="nv">$i</span><span class="s2"> "</span>|sed <span class="nt">-e</span> <span class="s1">'s/://'</span>  <span class="nt">-e</span> <span class="s1">'s/\+/\n  |--/g'</span><span class="p">;</span> <span class="k">done</span> <span class="p">;</span><span class="nb">echo</span><span class="p">;</span> <span class="k">done</span><span class="p">;</span> <span class="nb">echo</span>
+</code></pre></div></div>
 
 
       

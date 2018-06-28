@@ -36,3 +36,30 @@ sed -i 's/PT_USERTIME = "1800"/PT_USERTIME = "0"/' /etc/csf/csf.conf
 sed -i 's/PT_USERKILL_ALERT = "1"/PT_USERKILL_ALERT = "0"/' /etc/csf/csf.conf
 sed -i 's/PT_LOAD = "30"/PT_LOAD = "0"/' /etc/csf/csf.conf
 ```
+
+## CSF GUI on ISPCONFIG 3
+
+nstall old CSF (before 8.13)
+
+Copy the ISPCONFIG folder to /etc/csf/ and enable CSF in ISPCONFIG
+
+Backup csfui* files
+
+Upgrade CSF
+
+Copy backuped csfui* files back
+
+Run the following commands:
+
+```bash
+sed -i 's/checkip/ConfigServer::CheckIP::checkip/g' /usr/local/csf/bin/csfui.pl
+sed -i 's/sanity(/ConfigServer::Sanity::sanity(/g' /usr/local/csf/bin/csfui.pl
+```
+
+## Unblock Invalid packets in CSF
+
+```bash
+# Drop out of order packets and packets in an INVALID state in iptables
+# connection tracking
+PACKET_FILTER = "0"
+```

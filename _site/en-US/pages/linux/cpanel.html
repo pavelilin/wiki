@@ -17,7 +17,7 @@
 {"headline":"cPanel &amp; WHM","url":"http://localhost:4000/en-US/pages/linux/cpanel.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
+    <link rel="stylesheet" href="/assets/css/style.css?v=256f9ed9eb4fbc095bcc4262f9d1cf4aa9f8f2fa">
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
@@ -95,6 +95,63 @@ SSLHonorCipherOrder on
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/scripts/rebuildhttpdconf
 service httpd restart
+</code></pre></div></div>
+<h2 id="install-mod_pagespeed-on-whm">Install mod_pagespeed on WHM</h2>
+
+<p>With EA3:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/cpanel/3rdparty/bin/git clone https://github.com/pagespeed/cpanel.git /tmp/pagespeed/
+<span class="nb">cd</span> /tmp/pagespeed/Easy
+<span class="nb">tar</span> <span class="nt">-zcvf</span> Speed.pm.tar.gz pagespeed
+mkdir <span class="nt">-p</span> /var/cpanel/easy/apache/custom_opt_mods/Cpanel/Easy
+mv Speed.pm Speed.pm.tar.gz <span class="nt">-t</span> /var/cpanel/easy/apache/custom_opt_mods/Cpanel/Easy/
+<span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm <span class="nt">-rf</span> /tmp/pagespeed
+</code></pre></div></div>
+
+<p>With EA4:
+Create file /etc/rpm/macros.apache2 and add the following lines of code exactly as below</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%_httpd_mmn 20120211x8664
+%_httpd_apxs /usr/bin/apxs
+%_httpd_dir /etc/apache2
+%_httpd_bindir %<span class="o">{</span>_httpd_dir<span class="o">}</span>/bin
+%_httpd_modconfdir %<span class="o">{</span>_httpd_dir<span class="o">}</span>/conf.modules.d
+%_httpd_confdir %<span class="o">{</span>_httpd_dir<span class="o">}</span>/conf.d
+%_httpd_contentdir /usr/share/apache2
+%_httpd_moddir /usr/lib64/apache2/modules
+</code></pre></div></div>
+
+<p>Next run the following commands in order, make sure you run each command on it’s own</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm <span class="nt">-rf</span> /root/rpmbuild/RPMS/x86_64/
+wget https://github.com/pagespeed/cpanel/raw/master/EA4/ea-apache24-mod_pagespeed-latest-stable.src.rpm
+rpmbuild <span class="nt">--rebuild</span> ea-apache24-mod_pagespeed-latest-stable.src.rpm
+rpm <span class="nt">-Uvh</span> /root/rpmbuild/RPMS/x86_64/ea-apache24-mod_pagespeed<span class="k">*</span>.rpm
+/etc/init.d/httpd restart
+</code></pre></div></div>
+
+<h2 id="fix-whmcpanel-templates">Fix WHM/CPanel templates</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /usr/local/apache/conf/httpd.conf<span class="o">{</span>,.cptech-<span class="sb">`</span>date +%Y%m%d<span class="sb">`</span><span class="o">}</span>
+mv /var/cpanel/templates/apache2_4/vhost.local /var/cpanel/templates/apache2_4/vhost.local.bak
+mv /var/cpanel/templates/apache2_4/ssl_vhost.local /var/cpanel/templates/apache2_4/ssl_vhost.local.bak
+/scripts/rebuildhttpdconf
+/scripts/restartsrv_httpd
+</code></pre></div></div>
+
+<h2 id="login-to-whm-with-link">Login to WHM with link</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>whmapi1 create_user_session <span class="nv">user</span><span class="o">=</span>root <span class="nv">service</span><span class="o">=</span>whostmgrd <span class="nv">locale</span><span class="o">=</span>en
+</code></pre></div></div>
+
+<h2 id="size-of-suspended-accounts-in-whm">Size of suspended accounts in WHM</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>i <span class="k">in</span> <span class="sb">`</span>whmapi1 listsuspended|grep user|cut <span class="nt">-d</span>: <span class="nt">-f2</span><span class="sb">`</span><span class="p">;</span> <span class="k">do </span><span class="nb">echo</span> <span class="s2">"Suspended account: </span><span class="nv">$i</span><span class="s2"> - using"</span> <span class="sb">`</span>whmapi1 listaccts <span class="nv">search</span><span class="o">=</span><span class="nv">$i</span> <span class="nv">searchtype</span><span class="o">=</span>user|grep diskused|cut <span class="nt">-d</span>: <span class="nt">-f2</span><span class="sb">`</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div></div>
+
+<h2 id="cpanel-resources-consumption-history-per-user">Cpanel resources consumption history per user</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">OUT</span><span class="o">=</span><span class="k">$(</span>/usr/local/cpanel/bin/dcpumonview | <span class="nb">grep</span> <span class="nt">-v</span> Top | sed <span class="nt">-e</span> <span class="s1">'s#&lt;[^&gt;]*&gt;# #g'</span> | <span class="k">while </span><span class="nb">read </span>i <span class="p">;</span> <span class="k">do </span><span class="nv">NF</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$i</span> | awk <span class="o">{</span><span class="s1">'print NF'</span><span class="o">}</span><span class="sb">`</span> <span class="p">;</span> <span class="k">if</span> <span class="o">[[</span> <span class="s2">"</span><span class="nv">$NF</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"5"</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then </span><span class="nv">USER</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$i</span> | awk <span class="o">{</span><span class="s1">'print $1'</span><span class="o">}</span><span class="sb">`</span><span class="p">;</span> <span class="nv">OWNER</span><span class="o">=</span><span class="sb">`</span><span class="nb">grep</span> <span class="nt">-e</span> <span class="s2">"^OWNER="</span> /var/cpanel/users/<span class="nv">$USER</span> | cut <span class="nt">-d</span><span class="o">=</span> <span class="nt">-f2</span><span class="sb">`</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OWNER</span><span class="s2"> </span><span class="nv">$i</span><span class="s2">"</span><span class="p">;</span> <span class="k">fi</span> <span class="p">;</span> <span class="k">done)</span> <span class="p">;</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">"USER CPU"</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span> | sort <span class="nt">-nrk4</span> | awk <span class="s1">'{printf "%s %s%\n",$2,$4}'</span> | head <span class="nt">-5</span><span class="o">)</span> | column <span class="nt">-t</span> <span class="p">;</span><span class="nb">echo</span><span class="p">;</span><span class="o">(</span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"USER MEMORY"</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span> | sort <span class="nt">-nrk5</span> | awk <span class="s1">'{printf "%s %s%\n",$2,$5}'</span> | head <span class="nt">-5</span><span class="o">)</span> | column <span class="nt">-t</span> <span class="p">;</span><span class="nb">echo</span><span class="p">;</span><span class="o">(</span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"USER MYSQL"</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span> | sort <span class="nt">-nrk6</span> | awk <span class="s1">'{printf "%s %s%\n",$2,$6}'</span> | head <span class="nt">-5</span><span class="o">)</span> | column <span class="nt">-t</span> <span class="p">;</span> 
 </code></pre></div></div>
 
 

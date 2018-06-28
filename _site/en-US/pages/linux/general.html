@@ -17,7 +17,7 @@
 {"headline":"Linux Tips &amp; Tricks","url":"http://localhost:4000/en-US/pages/linux/general.html","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=e547f1129b803a6b800d65cbca3d6668c622e98e">
+    <link rel="stylesheet" href="/assets/css/style.css?v=256f9ed9eb4fbc095bcc4262f9d1cf4aa9f8f2fa">
   </head>
   <body>
     <div class="container-lg px-3 my-5 markdown-body">
@@ -26,28 +26,6 @@
       
 
       <h1 id="linux-tips--tricks">Linux Tips &amp; Tricks</h1>
-
-<h2 id="wordpress-login-attack-check">Wordpress login attack check</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Crontab :
-0 <span class="k">*</span>/6 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>  sh /root/wplogin.sh
-
-Script :
-<span class="c">#!/bin/bash</span>
-
-<span class="c">###start editing</span>
-<span class="nv">thold</span><span class="o">=</span><span class="s2">"100"</span>
-<span class="nv">btime</span><span class="o">=</span><span class="s2">"359m"</span>
-<span class="c">###stop editing</span>
-
-egrep <span class="s1">'wp-login.php'</span> /usr/local/apache/domlogs/<span class="k">*</span> | <span class="nb">grep</span> <span class="nt">-v</span> ftp_log | awk <span class="nt">-F</span> : <span class="s1">'{print $2}'</span> | awk <span class="s1">'{print $1}'</span> | sort | uniq <span class="nt">-c</span> | sort <span class="nt">-n</span> | awk <span class="nt">-v</span> <span class="nv">limit</span><span class="o">=</span><span class="s2">"</span><span class="nv">$thold</span><span class="s2">"</span> <span class="s1">'$1 &gt; limit{print $2}'</span> <span class="o">&gt;</span> <span class="nv">$$</span>_ip_<span class="nv">$$</span>
-
-<span class="k">while </span><span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> <span class="nt">-r</span> line
-        <span class="k">do</span>
-                /usr/sbin/csf <span class="nt">-td</span> <span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span>  <span class="s2">"</span><span class="nv">$btime</span><span class="s2">"</span> <span class="s2">"banned for wordpress attack"</span>
-        <span class="k">done</span> &lt; <span class="nv">$$</span>_ip_<span class="nv">$$</span>
-rm <span class="nt">-f</span> <span class="nv">$$</span>_ip_<span class="nv">$$</span>
-</code></pre></div></div>
 
 <h2 id="prevent-oom-killer">Prevent OOM killer</h2>
 
@@ -76,82 +54,11 @@ To fix edit the /etx/sysctl.conf file and add:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>net.ipv4.ip_nonlocal_bind <span class="o">=</span> 1
 </code></pre></div></div>
 
-<h3 id="whm-replica">WHM replica</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rsync <span class="nt">-avz</span> 192.168.1.122:/home/ /home/ <span class="nt">--exclude</span><span class="o">=</span><span class="s2">"virtfs"</span> <span class="nt">--exclude</span><span class="o">=</span><span class="s2">"</span><span class="se">\.</span><span class="s2">cp*"</span> <span class="nt">--exclude</span><span class="o">=</span><span class="s2">"cpeasyapache"</span> 
-rsync <span class="nt">-avz</span> 192.168.1.122:/usr/local/apache/conf/ /usr/local/apache/conf/
-rsync <span class="nt">-avz</span> 192.168.1.122:/var/named/ /var/named/
-rsync <span class="nt">-avz</span> 192.168.1.122:/usr/local/cpanel/ /usr/local/cpanel/
-rsync <span class="nt">-avz</span> 192.168.1.122:/var/cpanel/ /var/cpanel
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chkconfig cpanel off
-chkconfig exim off
-chkconfig dovecot off
-chkconfig pure-ftpd off
-chkconfig named off
-chkconfig mysql off
-chkconfig csf off
-chkconfig iptables off
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname: /etc/sysconfig/network
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>change shared ip - You can change it <span class="k">in</span> /etc/wwwacct.conf infront of ADDR parameter.
-change ip - Usage: /usr/local/cpanel/bin/setsiteip <span class="o">[</span><span class="nt">-u</span> user | domain] ip   <span class="o">(</span>/etc/trueuserowners<span class="o">)</span>
-rebuild httpd conf
-restart apache
-</code></pre></div></div>
-
-<h2 id="apache-memory-usage">Apache memory usage</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps <span class="nt">-ylC</span> httpd | awk <span class="s1">'{x += $8;y += 1} END {print "Apache Memory Usage (MB): "x/1024; print "Average Proccess Size (MB): "x/((y-1)*1024)}'</span>
-</code></pre></div></div>
-
-<h2 id="wordpress-pingback">Wordpress pingback</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># WordPress Pingback Request Denial</span>
-<span class="k">if</span> <span class="o">(</span><span class="nv">$http_user_agent</span> ~<span class="k">*</span> <span class="s2">"WordPress"</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">return </span>403<span class="p">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>Apache:
-BrowserMatchNoCase WordPress wordpress_ping
-BrowserMatchNoCase Wordpress wordpress_ping
-Order Deny,Allow
-Deny from env=wordpress_ping</p>
-
 <h2 id="find-big-files-and-folders">Find big files and folders</h2>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-mount</span> <span class="nt">-type</span> f <span class="nt">-print0</span> 2&gt;/dev/null | xargs <span class="nt">-0</span> du 2&gt;/dev/null | sort <span class="nt">-n</span> | tail <span class="nt">-40</span> | cut <span class="nt">-f2</span> | xargs <span class="nt">-I</span><span class="o">{}</span> du <span class="nt">-sh</span> 2&gt;/dev/null <span class="o">{}</span> | uniq<span class="p">;</span> <span class="nb">printf</span> <span class="s1">'+%.0s'</span> <span class="o">{</span>1..100<span class="o">}</span><span class="p">;</span> <span class="nb">echo</span><span class="p">;</span> <span class="se">\</span>
 find / <span class="nt">-mount</span> <span class="nt">-type</span> d <span class="nt">-print0</span> 2&gt;/dev/null | xargs <span class="nt">-0</span> du 2&gt;/dev/null | sort <span class="nt">-n</span> | tail <span class="nt">-40</span> | cut <span class="nt">-f2</span> | xargs <span class="nt">-I</span><span class="o">{}</span> du <span class="nt">-sh</span> 2&gt;/dev/null <span class="o">{}</span> | uniq<span class="p">;</span> <span class="nb">printf</span> <span class="s1">'+%.0s'</span> <span class="o">{</span>1..100<span class="o">}</span><span class="p">;</span> <span class="nb">echo</span><span class="p">;</span> <span class="se">\</span>
 du <span class="nt">-sh</span> /var/cpanel/user_notifications <span class="o">&amp;&amp;</span> du <span class="nt">-sh</span> /backup/cpbackup/<span class="k">*</span>/dirs/_var_cpanel/user_notifications
-</code></pre></div></div>
-
-<h2 id="rebuild-sophos-when-disk-full">Rebuild Sophos when disk full</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/init.d/postgresql92 rebuild
-</code></pre></div></div>
-
-<p>On older versions:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/mdw/scripts/smtp stop
-dropdb <span class="nt">-U</span> postgres smtp
-createdb <span class="nt">-U</span> postgres smtp
-/var/mdw/scripts/smtp start
-</code></pre></div></div>
-
-<h2 id="clear-allowed-networks-on-sophos">Clear allowed networks on Sophos</h2>
-
-<p>Login to the Sophos</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Type ‘cc’
-In cc, you’ll be <span class="k">in </span>MAIN, <span class="k">if </span>not, <span class="nb">type</span> ‘MAIN’
-Type ‘webadmin<span class="s1">'
-Type ‘allowed_networks@'</span>
-<span class="o">=[</span><span class="s1">'REF_NetworkAny'</span><span class="o">]</span>
 </code></pre></div></div>
 
 <h2 id="most-accessed-sites-in-the-last-minute">Most accessed sites in the last minute</h2>
@@ -217,23 +124,6 @@ net.ipv6.conf.all.disable_ipv6 <span class="o">=</span> 1
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VBoxManage internalcommands createrawvmdk <span class="nt">-filename</span> C:<span class="se">\u</span>sb.vmdk <span class="nt">-rawdisk</span> <span class="se">\\</span>.<span class="se">\P</span>hysicalDrive#
 </code></pre></div></div>
 
-<h2 id="csf-gui-on-ispconfig-3">CSF GUI on ISPCONFIG 3</h2>
-
-<p>nstall old CSF (before 8.13)</p>
-
-<p>Copy the ISPCONFIG folder to /etc/csf/ and enable CSF in ISPCONFIG</p>
-
-<p>Backup csfui* files</p>
-
-<p>Upgrade CSF</p>
-
-<p>Copy backuped csfui* files back</p>
-
-<p>Run the following commands:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/checkip/ConfigServer::CheckIP::checkip/g'</span> /usr/local/csf/bin/csfui.pl
-sed <span class="nt">-i</span> <span class="s1">'s/sanity(/ConfigServer::Sanity::sanity(/g'</span> /usr/local/csf/bin/csfui.pl
-</code></pre></div></div>
 <h2 id="max-connections-on-linux">Max connections on Linux</h2>
 
 <p>Add to /etc/sysctl.conf:</p>
@@ -244,40 +134,6 @@ net.ipv4.tcp_fin_timeout <span class="o">=</span> 10
 net.ipv4.ip_local_port_range <span class="o">=</span> 15000 61000
 net.core.somaxconn <span class="o">=</span> 1024
 net.core.netdev_max_backlog <span class="o">=</span> 2000
-</code></pre></div></div>
-
-<h2 id="csf-configuration">CSF configuration</h2>
-
-<p>Automated configuration:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/TESTING = "1"/TESTING = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/RESTRICT_SYSLOG = "0"/RESTRICT_SYSLOG = "3"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/IPV6 = "1"/IPV6 = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/IGNORE_ALLOW = "0"/IGNORE_ALLOW = "1"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/CONNLIMIT = ""/CONNLIMIT = "22;5,80;70"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/PORTFLOOD = ""/PORTFLOOD = "22;tcp;5;300,80;tcp;100;1,443;tcp;100;5"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/CT_LIMIT = "0"/CT_LIMIT = "300"/'</span> /etc/csf/csf.conf
-</code></pre></div></div>
-
-<p>Disable LFD alerts: Only if you want to disable them.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/LF_EMAIL_ALERT = "1"/LF_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/LF_SSH_EMAIL_ALERT = "1"/LF_SSH_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/LF_SU_EMAIL_ALERT = "1"/LF_SU_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/LF_WEBMIN_EMAIL_ALERT = "1"/LF_WEBMIN_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/LF_CONSOLE_EMAIL_ALERT = "1"/LF_CONSOLE_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/LT_EMAIL_ALERT = "1"/LT_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/CT_EMAIL_ALERT = "1"/CT_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/PS_EMAIL_ALERT = "1"/PS_EMAIL_ALERT = "0"/'</span> /etc/csf/csf.conf
-</code></pre></div></div>
-
-<p>Disable PT alerts: Only if you want to disable them.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/PT_USERPROC = "10"/PT_USERPROC = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/PT_USERMEM = "256"/PT_USERMEM = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/PT_USERTIME = "1800"/PT_USERTIME = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/PT_USERKILL_ALERT = "1"/PT_USERKILL_ALERT = "0"/'</span> /etc/csf/csf.conf
-sed <span class="nt">-i</span> <span class="s1">'s/PT_LOAD = "30"/PT_LOAD = "0"/'</span> /etc/csf/csf.conf
 </code></pre></div></div>
 
 <h2 id="rescan-drives">Rescan drives</h2>
@@ -312,82 +168,6 @@ dpkg-reconfigure locales
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo </span>3 <span class="o">&gt;</span> /proc/sys/vm/drop_caches <span class="o">&amp;&amp;</span> swapoff <span class="nt">-a</span> <span class="o">&amp;&amp;</span> swapon <span class="nt">-a</span>
 </code></pre></div></div>
 
-<h2 id="disable-core-files-in-cpanel-account">Disable core files in CPanel account</h2>
-
-<p>Add this in /etc/sysctl.conf</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel.core_uses_pid <span class="o">=</span> 0
-kernel.core_pattern <span class="o">=</span> /dev/null
-</code></pre></div></div>
-
-<p>And then run:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sysctl <span class="nt">-p</span>
-</code></pre></div></div>
-
-<p>##Add HSTS support in CPANEL</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp <span class="nt">-p</span> /var/cpanel/templates/apache2_4/ssl_vhost.default /var/cpanel/templates/apache2_4/ssl_vhost.local
-vi /var/cpanel/templates/apache2_4/ssl_vhost.local
-</code></pre></div></div>
-
-<p>Edit:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;VirtualHost[% FOREACH ipblock IN vhost.ips %] <span class="o">[</span>% ipblock.ip %]:[% ipblock.port %][% END %]&gt;
- <span class="c"># Enable HTTP Strict Transport Security</span>
- Header always <span class="nb">set </span>Strict-Transport-Security <span class="s2">"max-age=63072000; includeSubdomains;"</span>
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp <span class="nt">-p</span> /var/cpanel/templates/apache2_4/main.default /var/cpanel/templates/apache2_4/main.local
-vi /var/cpanel/templates/apache2_4/main.local
-</code></pre></div></div>
-
-<p>Edit:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>% IF main.sslprotocol.item.sslprotocol.length %]SSLProtocol <span class="o">[</span>% main.sslprotocol.item.sslprotocol %][% END %]
-SSLHonorCipherOrder on
-</code></pre></div></div>
-
-<p>Run:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/scripts/rebuildhttpdconf
-service httpd restart
-</code></pre></div></div>
-
-<h2 id="install-mod_pagespeed-on-whm">Install mod_pagespeed on WHM</h2>
-
-<p>With EA3:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/cpanel/3rdparty/bin/git clone https://github.com/pagespeed/cpanel.git /tmp/pagespeed/
-<span class="nb">cd</span> /tmp/pagespeed/Easy
-<span class="nb">tar</span> <span class="nt">-zcvf</span> Speed.pm.tar.gz pagespeed
-mkdir <span class="nt">-p</span> /var/cpanel/easy/apache/custom_opt_mods/Cpanel/Easy
-mv Speed.pm Speed.pm.tar.gz <span class="nt">-t</span> /var/cpanel/easy/apache/custom_opt_mods/Cpanel/Easy/
-<span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm <span class="nt">-rf</span> /tmp/pagespeed
-</code></pre></div></div>
-
-<p>With EA4:
-Create file /etc/rpm/macros.apache2 and add the following lines of code exactly as below</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%_httpd_mmn 20120211x8664
-%_httpd_apxs /usr/bin/apxs
-%_httpd_dir /etc/apache2
-%_httpd_bindir %<span class="o">{</span>_httpd_dir<span class="o">}</span>/bin
-%_httpd_modconfdir %<span class="o">{</span>_httpd_dir<span class="o">}</span>/conf.modules.d
-%_httpd_confdir %<span class="o">{</span>_httpd_dir<span class="o">}</span>/conf.d
-%_httpd_contentdir /usr/share/apache2
-%_httpd_moddir /usr/lib64/apache2/modules
-</code></pre></div></div>
-
-<p>Next run the following commands in order, make sure you run each command on it’s own</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm <span class="nt">-rf</span> /root/rpmbuild/RPMS/x86_64/
-wget https://github.com/pagespeed/cpanel/raw/master/EA4/ea-apache24-mod_pagespeed-latest-stable.src.rpm
-rpmbuild <span class="nt">--rebuild</span> ea-apache24-mod_pagespeed-latest-stable.src.rpm
-rpm <span class="nt">-Uvh</span> /root/rpmbuild/RPMS/x86_64/ea-apache24-mod_pagespeed<span class="k">*</span>.rpm
-/etc/init.d/httpd restart
-</code></pre></div></div>
-
 <h2 id="resize-root-partition-without-reboot">Resize root partition without reboot</h2>
 
 <p>Resize HD size in VC Run: (replace the device if needed)</p>
@@ -412,11 +192,6 @@ resize2fs <span class="nt">-f</span> /dev/sda3
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-name</span> <span class="s1">'*'</span>|xargs rm
 </code></pre></div></div>
 
-<h2 id="show-all-domains-in-nginx-configuration">Show all domains in NGINX configuration</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-e</span> <span class="s2">"^</span><span class="se">\s</span><span class="s2">*server_name"</span> /etc/nginx/conf.d/<span class="k">*</span>|sed <span class="nt">-e</span> <span class="s1">'s/[\t ]*server_name//g;'</span>|sed <span class="nt">-e</span> <span class="s2">"s/ /</span><span class="se">\+</span><span class="s2">/g"</span>|sed <span class="nt">-e</span> <span class="s1">'s/;//g'</span>|while <span class="nb">read </span>line<span class="p">;</span> <span class="k">do for </span>i <span class="k">in</span> <span class="nv">$line</span><span class="p">;</span> <span class="k">do </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"</span><span class="nv">$i</span><span class="s2"> "</span>|sed <span class="nt">-e</span> <span class="s1">'s/://'</span>  <span class="nt">-e</span> <span class="s1">'s/\+/\n  |--/g'</span><span class="p">;</span> <span class="k">done</span> <span class="p">;</span><span class="nb">echo</span><span class="p">;</span> <span class="k">done</span><span class="p">;</span> <span class="nb">echo</span>
-</code></pre></div></div>
-
 <h2 id="kill-process-that-runs-more-than-x-time">Kill process that runs more than X time</h2>
 
 <p>Kill cgi after 30 secs:</p>
@@ -424,25 +199,9 @@ resize2fs <span class="nt">-f</span> /dev/sda3
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>i <span class="k">in</span> <span class="sb">`</span>ps <span class="nt">-eo</span> pid,etime,cmd|grep cgi|awk <span class="s1">'$2 &gt; "00:30" {print $1}'</span><span class="sb">`</span><span class="p">;</span> <span class="k">do </span><span class="nb">kill</span> <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span>
 </code></pre></div></div>
 
-<h2 id="unblock-invalid-packets-in-csf">Unblock Invalid packets in CSF</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Drop out of order packets and packets in an INVALID state in iptables</span>
-<span class="c"># connection tracking</span>
-PACKET_FILTER <span class="o">=</span> <span class="s2">"0"</span>
-</code></pre></div></div>
-
 <h2 id="who-uses-ram">Who uses RAM</h2>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps aux  | awk <span class="s1">'{print $6/1024 " MB\t\t" $11}'</span>  | sort <span class="nt">-n</span>
-</code></pre></div></div>
-
-<h2 id="fix-whmcpanel-templates">Fix WHM/CPanel templates</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /usr/local/apache/conf/httpd.conf<span class="o">{</span>,.cptech-<span class="sb">`</span>date +%Y%m%d<span class="sb">`</span><span class="o">}</span>
-mv /var/cpanel/templates/apache2_4/vhost.local /var/cpanel/templates/apache2_4/vhost.local.bak
-mv /var/cpanel/templates/apache2_4/ssl_vhost.local /var/cpanel/templates/apache2_4/ssl_vhost.local.bak
-/scripts/rebuildhttpdconf
-/scripts/restartsrv_httpd
 </code></pre></div></div>
 
 <h2 id="fix-nfs-mount-on-boot---centos-7">Fix NFS mount on boot - Centos 7</h2>
@@ -468,11 +227,6 @@ systemctl <span class="nb">enable </span>rpcbind.socket
 
 <p>Reboot the server</p>
 
-<h2 id="login-to-whm-with-link">Login to WHM with link</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>whmapi1 create_user_session <span class="nv">user</span><span class="o">=</span>root <span class="nv">service</span><span class="o">=</span>whostmgrd <span class="nv">locale</span><span class="o">=</span>en
-</code></pre></div></div>
-
 <h2 id="update-date-and-time-on-linux-server">Update date and time on Linux server</h2>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ntpd <span class="nt">-qg</span><span class="p">;</span> <span class="nb">sudo </span>hwclock <span class="nt">-w</span>
@@ -491,39 +245,9 @@ useradd <span class="nt">--groups</span> <span class="k">${</span><span class="n
 passwd <span class="k">${</span><span class="nv">DEST</span><span class="k">}</span>
 </code></pre></div></div>
 
-<h2 id="reload-vm-after-uuid-change">Reload VM after UUID change</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim-cmd vmsvc/getallvms
-vim-cmd vmsvc/reload <span class="nv">$vmID</span>
-</code></pre></div></div>
-
-<h2 id="size-of-suspended-accounts-in-whm">Size of suspended accounts in WHM</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>i <span class="k">in</span> <span class="sb">`</span>whmapi1 listsuspended|grep user|cut <span class="nt">-d</span>: <span class="nt">-f2</span><span class="sb">`</span><span class="p">;</span> <span class="k">do </span><span class="nb">echo</span> <span class="s2">"Suspended account: </span><span class="nv">$i</span><span class="s2"> - using"</span> <span class="sb">`</span>whmapi1 listaccts <span class="nv">search</span><span class="o">=</span><span class="nv">$i</span> <span class="nv">searchtype</span><span class="o">=</span>user|grep diskused|cut <span class="nt">-d</span>: <span class="nt">-f2</span><span class="sb">`</span><span class="p">;</span> <span class="k">done</span>
-</code></pre></div></div>
-
 <h2 id="clear-boot-on-ubuntu-when-100">Clear BOOT on Ubuntu when 100%</h2>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dpkg <span class="nt">--purge</span> <span class="sb">`</span>dpkg <span class="nt">--list</span>|grep <span class="s2">"linux-"</span>|grep <span class="nt">-v</span> <span class="se">\`</span>uname <span class="nt">-r</span>|sed <span class="s1">'s/-generic//g'</span><span class="se">\`</span>|cut <span class="nt">-d</span><span class="s2">" "</span> <span class="nt">-f3</span>|grep <span class="s2">"[0-9]-"</span>|paste <span class="nt">-sd</span> <span class="s2">" "</span> -<span class="sb">`</span>
-</code></pre></div></div>
-
-<h2 id="one-time-login-to-wordpress">One-time login to wordpress</h2>
-
-<p>Install wp cli:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-O</span> https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-chmod +x wp-cli.phar
-mv wp-cli.phar /usr/local/bin/wp
-</code></pre></div></div>
-
-<p>Run from the WordPress installed location:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">useradmin</span><span class="o">=</span><span class="sb">`</span>wp user list <span class="nt">--role</span><span class="o">=</span>administrator <span class="nt">--format</span><span class="o">=</span>csv <span class="nt">--allow-root</span> | cut <span class="nt">-d</span><span class="s1">','</span> <span class="nt">-f2</span> | head <span class="nt">-2</span> | tail <span class="nt">-1</span><span class="sb">`</span> <span class="o">&amp;&amp;</span>  wp plugin install one-time-login <span class="nt">--activate</span> <span class="nt">--allow-root</span> <span class="o">&amp;&amp;</span> wp user one-time-login <span class="nv">$useradmin</span> <span class="nt">--allow-root</span> <span class="o">&amp;&amp;</span> <span class="nv">user</span><span class="o">=</span><span class="k">$(</span>stat <span class="nt">-c</span> <span class="s2">"%U"</span> <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="k">)</span> <span class="o">&amp;&amp;</span> chown <span class="nv">$user</span>.<span class="nv">$user</span> wp-content/ <span class="nt">-R</span>
-</code></pre></div></div>
-
-<h2 id="cpanel-resources-consumption-history-per-user">Cpanel resources consumption history per user</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">OUT</span><span class="o">=</span><span class="k">$(</span>/usr/local/cpanel/bin/dcpumonview | <span class="nb">grep</span> <span class="nt">-v</span> Top | sed <span class="nt">-e</span> <span class="s1">'s#&lt;[^&gt;]*&gt;# #g'</span> | <span class="k">while </span><span class="nb">read </span>i <span class="p">;</span> <span class="k">do </span><span class="nv">NF</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$i</span> | awk <span class="o">{</span><span class="s1">'print NF'</span><span class="o">}</span><span class="sb">`</span> <span class="p">;</span> <span class="k">if</span> <span class="o">[[</span> <span class="s2">"</span><span class="nv">$NF</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"5"</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then </span><span class="nv">USER</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$i</span> | awk <span class="o">{</span><span class="s1">'print $1'</span><span class="o">}</span><span class="sb">`</span><span class="p">;</span> <span class="nv">OWNER</span><span class="o">=</span><span class="sb">`</span><span class="nb">grep</span> <span class="nt">-e</span> <span class="s2">"^OWNER="</span> /var/cpanel/users/<span class="nv">$USER</span> | cut <span class="nt">-d</span><span class="o">=</span> <span class="nt">-f2</span><span class="sb">`</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OWNER</span><span class="s2"> </span><span class="nv">$i</span><span class="s2">"</span><span class="p">;</span> <span class="k">fi</span> <span class="p">;</span> <span class="k">done)</span> <span class="p">;</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">"USER CPU"</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span> | sort <span class="nt">-nrk4</span> | awk <span class="s1">'{printf "%s %s%\n",$2,$4}'</span> | head <span class="nt">-5</span><span class="o">)</span> | column <span class="nt">-t</span> <span class="p">;</span><span class="nb">echo</span><span class="p">;</span><span class="o">(</span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"USER MEMORY"</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span> | sort <span class="nt">-nrk5</span> | awk <span class="s1">'{printf "%s %s%\n",$2,$5}'</span> | head <span class="nt">-5</span><span class="o">)</span> | column <span class="nt">-t</span> <span class="p">;</span><span class="nb">echo</span><span class="p">;</span><span class="o">(</span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"USER MYSQL"</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span> | sort <span class="nt">-nrk6</span> | awk <span class="s1">'{printf "%s %s%\n",$2,$6}'</span> | head <span class="nt">-5</span><span class="o">)</span> | column <span class="nt">-t</span> <span class="p">;</span> 
 </code></pre></div></div>
 
 <h2 id="engintron-generate-custom_rules-for-all-domains-on-the-server">Engintron generate custom_rules for all domains on the server.</h2>
@@ -536,7 +260,7 @@ mv wp-cli.phar /usr/local/bin/wp
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/installatron/repair <span class="nt">-f</span> <span class="nt">--release</span> <span class="nt">--quick</span>
 </code></pre></div></div>
 
-<h3 id="installatron-fix"><a href="https://installatron.com/docs/admin/troubleshooting#missinginstalls">Installatron FIX</a></h3>
+<p><a href="https://installatron.com/docs/admin/troubleshooting#missinginstalls">Installatron FIX</a></p>
 
 <h2 id="find-root-of-a-site-and-cd-to-it">Find root of a site and CD to it</h2>
 
